@@ -8,8 +8,9 @@ export const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    // No reducer needed for categories at the moment
+    checkStatus: () => 'Under construction',
   },
 });
 
+export const { checkStatus } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
