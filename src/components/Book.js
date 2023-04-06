@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Book({ bookInfo }) {
+function Book({ book }) {
   return (
     <li>
       <div className="book-info">
-        <p>{bookInfo.title}</p>
-        <span>{bookInfo.author}</span>
+        <p>{book.title}</p>
+        <span>{book.author}</span>
       </div>
     </li>
   );
 }
 
 Book.propTypes = {
-  bookInfo: PropTypes.shape({
+  book: PropTypes.shape({
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
   }).isRequired,
