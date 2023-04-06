@@ -32,8 +32,8 @@ export const booksSlice = createSlice({
     },
 
     removeBook: (state, action) => {
-      const bookIndex = state.findIndex((book) => book.id === action.payload);
-      state.splice(bookIndex, 1);
+      const bookIndex = state.books.findIndex((book) => book.id === action.payload.id);
+      state.books.splice(bookIndex, 1);
     },
   },
 });

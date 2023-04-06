@@ -8,7 +8,6 @@ import AddBookButton from './AddBookButton';
 export default function BookList() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [category, setCategory] = useState('');
 
   const books = useSelector((state) => state.books.books);
   const dispatch = useDispatch();
@@ -21,16 +20,11 @@ export default function BookList() {
     setAuthor(event.target.value);
   };
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
   const handleAddBook = (event) => {
     event.preventDefault();
-    dispatch(addBook({ title, author, category }));
+    dispatch(addBook({ title, author }));
     setTitle('');
     setAuthor('');
-    setCategory('');
   };
 
   return (
@@ -43,8 +37,7 @@ export default function BookList() {
       <form onSubmit={handleAddBook}>
         <input type="text" placeholder="Book title" value={title} onChange={handleTitleChange} />
         <input type="text" placeholder="Author" value={author} onChange={handleAuthorChange} />
-        <input type="text" placeholder="Category" value={category} onChange={handleCategoryChange} />
-        <AddBookButton />
+        <AddBookButton title={title} author={author} />
       </form>
     </div>
   );

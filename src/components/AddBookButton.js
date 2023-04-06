@@ -1,15 +1,16 @@
 import { useDispatch } from 'react-redux';
+import propTypes from 'prop-types';
 import { addBook } from '../redux/books/booksSlice';
 
-export default function AddBookButton() {
+export default function AddBookButton({ title, author }) {
   const dispatch = useDispatch();
 
   const handleAddBook = (event) => {
     event.preventDefault();
     const book = {
       id: Math.random().toString(36).substring(7),
-      title: 'New Book Title',
-      author: 'New Book Author',
+      title,
+      author,
     };
     dispatch(addBook(book));
   };
@@ -18,3 +19,8 @@ export default function AddBookButton() {
     <button type="submit" onClick={handleAddBook}>Add Book</button>
   );
 }
+
+AddBookButton.propTypes = {
+  title: propTypes.string.isRequired,
+  author: propTypes.string.isRequired,
+};
