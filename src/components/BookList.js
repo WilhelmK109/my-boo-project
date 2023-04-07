@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Book from './Book';
 import './BookList.css';
-import { addBook } from '../redux/books/booksSlice';
+import { addBook, fetchBooks } from '../redux/books/booksSlice';
 import AddBookButton from './AddBookButton';
 
 export default function BookList() {
@@ -11,6 +11,10 @@ export default function BookList() {
 
   const books = useSelector((state) => state.books.books);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
