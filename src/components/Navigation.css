@@ -1,12 +1,23 @@
 .nav-bar {
+  margin: 0 0 2%;
+  padding: 1% 6% 1% 6%;
+  background-color: #fff;
+  border: solid 1px #e8e8e8;
   display: flex;
   justify-content: space-around;
-  width: 80%;
-  margin-top: 1%;
+  align-items: center;
 }
 
 .nav-bar h1 {
-  font-size: 1.6rem;
+  padding-right: 2.938rem;
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  font-size: 1.875rem;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0290ff;
 }
 
 .nav-list {
