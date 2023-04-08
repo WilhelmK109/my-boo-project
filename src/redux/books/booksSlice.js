@@ -7,8 +7,7 @@ const initialState = {
   error: null,
 };
 
-const BOOKSTOREID = 'PMAK-642f3e6459ed195b863d0da0-e8f5af61ff182b59f7e205dcddb149792e';
-const url = `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/${BOOKSTOREID}/books`;
+const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/';
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
   try {
@@ -30,8 +29,11 @@ export const createBook = createAsyncThunk('books/createBook', async (book) => {
 
 export const deleteBook = createAsyncThunk('books/deleteBook', async (bookId) => {
   try {
-    await axios.delete(`${url}/${bookId}`);
-    return bookId;
+    if (!bookId) {
+      throw new Error('Invalid book ID');
+    }
+    const response = await axios.delete(`${url}/${bookId}`);
+    return response.data;
   } catch (error) {
     return error;
   }
@@ -49,13 +51,27 @@ export const booksSlice = createSlice({
       const bookId = action.payload;
       return {
         ...state,
-        books: state.books.filter((book) => book.book_id !== bookId),
+        books: state.books.filter((book) => book.item_id !== bookId),
       };
     },
   },
 
   extraReducers: (builder) => {
     builder
+      .addCase(fetchBooks.fulfilled, (state, action) => {
+        const bookList = action.payload;
+        const newBookList = [];
+        Object.keys(bookList).forEach((book) => newBookList.push({
+          item_id: book,
+          title: bookList[book][0].title,
+          author: bookList[book][0].author,
+        }));
+        return ({
+          ...state,
+          books: newBookList,
+          status: 'loading',
+        });
+      })
       .addCase(createBook.pending, (state) => ({ ...state, status: 'loading', error: null }))
       .addCase(createBook.fulfilled, (state, action) => ({ ...state, status: 'succeeded', books: [...state.books, action.payload] }))
       .addCase(createBook.rejected, (state, action) => ({ ...state, status: 'failed', error: action.payload }))

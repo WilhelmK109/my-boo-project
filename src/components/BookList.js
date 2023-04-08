@@ -1,48 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Book from './Book';
 import './BookList.css';
-import { addBook, fetchBooks } from '../redux/books/booksSlice';
+import { fetchBooks } from '../redux/books/booksSlice';
 import AddBookButton from './AddBookButton';
 
 export default function BookList() {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-
   const books = useSelector((state) => state.books.books);
+  const isloading = useSelector((state) => state.books.isloading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchBooks());
   }, [dispatch]);
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value);
-  };
-
-  const handleAddBook = (event) => {
-    event.preventDefault();
-    dispatch(addBook({ title, author }));
-    setTitle('');
-    setAuthor('');
-  };
+  if (isloading) {
+    return (
+      <p>Loading...</p>
+    );
+  }
 
   return (
-    <div>
+    <div className="book-list-container">
       <ul className="books-list">
         {books.map((book) => (
-          <Book key={book.id} book={book} />
+          <Book key={book.item_id} book={book} />
         ))}
       </ul>
-      <form onSubmit={handleAddBook}>
-        <input type="text" placeholder="Book title" value={title} onChange={handleTitleChange} />
-        <input type="text" placeholder="Author" value={author} onChange={handleAuthorChange} />
-        <AddBookButton title={title} author={author} />
-      </form>
+      <AddBookButton />
     </div>
   );
 }

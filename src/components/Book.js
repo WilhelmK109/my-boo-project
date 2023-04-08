@@ -26,8 +26,8 @@ export default function Book({ book }) {
 
 Book.propTypes = {
   book: PropTypes.shape({
-    item_id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    item_id: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
   }).isRequired,
 };
