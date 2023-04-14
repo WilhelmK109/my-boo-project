@@ -23,16 +23,16 @@ export default function Book({ book }) {
 
   return (
     <li>
-      <div className="book-info">
+      <div className="book-info d-flex">
         <h2 className="book-title">{book.title}</h2>
         <span className="book-author">{book.author}</span>
-        <div className="book-buttons">
+        <div className="book-buttons d-flex">
           <button type="button">Comment</button>
           <button type="button" onClick={() => handleRemove(book.item_id)}>Remove</button>
           <button type="button">Edit</button>
         </div>
       </div>
-      <div className="percentage">
+      <div className="percentage d-flex">
         <CircularProgressbar
           value={progress}
           className="progress-bar"
@@ -45,7 +45,7 @@ export default function Book({ book }) {
           <p>Completed</p>
         </div>
       </div>
-      <div className="progress-section">
+      <div className="progress-section d-flex">
         <h2 className="current-chapter">CURRENT CHAPTER</h2>
         <p className="chapter">Chapter 5</p>
         <button

@@ -20,7 +20,7 @@ export default function BookList() {
 
   return (
     <div className="book-list-container">
-      <ul className="books-list">
+      <ul className="books-list d-flex">
         {books.map((book) => (
           <Book key={book.item_id} book={book} />
         ))}
