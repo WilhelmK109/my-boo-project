@@ -28,7 +28,7 @@ export default function AddBookButton() {
   return (
     <div className="form-container">
       <h2>Add New Book</h2>
-      <form onSubmit={handleAddBook}>
+      <form onSubmit={handleAddBook} className="add-form d-flex">
         <input className="input-title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Book title" />
         <input className="input-author" type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" />
         <button className="add-button" type="submit">Add Book</button>
