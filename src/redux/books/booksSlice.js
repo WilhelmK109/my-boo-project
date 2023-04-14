@@ -7,7 +7,7 @@ const initialState = {
   error: null,
 };
 
-const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/';
+const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/SERz0T6MOlfncfi0umcc/books';
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
   try {
